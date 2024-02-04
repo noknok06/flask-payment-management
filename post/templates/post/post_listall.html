@@ -1,14 +1,17 @@
-{% extends 'post/base.html' %} {% block header %}
+{% extends 'post/base.html' %} 
+
+{% block header %}
 <p>請求締めまで終えた契約も表示されます</p>
-{% endblock header %} {% block content %}
+{% endblock header %}
+{% block content %}
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
-    <table class="table">
+    <table class="table" id="data-table">
         <thead>
             <tr>
                 <th scope="col">契約会社</th>
                 <th scope="col">案件名</th>
-                <th scope="col">計上予定日</th>
                 <th scope="col">ステータス</th>
+                <th scope="col">計上予定日</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -17,8 +20,8 @@
             <tr>
                 <td>{{ task.contract_partner }}</td>
                 <td>{{ task.title }}</td>
-                <td>{{ task.recording_date }}</td>
                 <td>{{ task.status }}</td>
+                <td>{{ task.recording_date }}</td>
                 <td id="action_list">
                     <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
                     <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
@@ -29,6 +32,5 @@
         </tbody>
     </table>
 </div>
-
 
 {% endblock content %}

@@ -1,61 +1,58 @@
+@charset "UTF-8";
 i {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .fa-circle-info {
-    color: #85c8ee
+  color: #85c8ee;
 }
 
 .fa-file-pen {
-    color: #52795a;
+  color: #52795a;
 }
 
 .fa-trash-can {
-    color: #963333;
+  color: #963333;
 }
 
 #action_list {
-    display: flex;
-    justify-content: space-around;
-}
-
-#detail_table {
-    width: 100%;
-}
-
-#detail_table th {
-    position: relative;
-    text-align: left;
-    width: 15%;
-}
-
-#detail_table th:after {
-    display: block;
-    content: "";
-    width: 30px;
-    height: 2px;
-    background-color: #333;
-    position: absolute;
-    top: calc(50% - 1px);
-    right: -15px;
-}
-
-#detail_table td {
-    text-align: left;
-    padding: 7px 0 7px 30px;
-    width: 85%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 /* 一覧画面 */
-.contact_table{
-    margin-bottom: 2rem;
+.contact_table {
+  margin-bottom: 2rem;
 }
 
 /* 詳細画面 */
-.detail_card{
-    margin-bottom: 2rem;
+.detail_card {
+  margin-bottom: 2rem;
 }
-.detail_card .card-header h2{
-    float: left;
-    padding-right: 1.5rem;
+.detail_card .card-header h2 {
+  /* float: left; */
+  padding-top: 0;
+  padding-right: 1.5rem;
 }
+.detail_card .card-title {
+  margin-top: 0;
+}
+
+#detail_table {
+  margin: 3.5rem 0;
+  width: 100%;
+}
+#detail_table tbody tr th {
+  font-weight: normal;
+  background-color: #f8f6f2;
+  vertical-align: middle;
+  padding: 1rem;
+  width: 20%;
+}
+#detail_table tbody tr td {
+  padding: 0.75rem 1rem 1.75rem;
+}
+/*# sourceMappingURL=post.css.map */

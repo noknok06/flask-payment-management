@@ -1,0 +1,56 @@
+i {
+    font-size: 1.3rem;
+}
+
+.fa-circle-info {
+    color: #85c8ee
+}
+
+.fa-file-pen {
+    color: #52795a;
+}
+
+.fa-trash-can {
+    color: #963333;
+}
+
+#action_list {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* 一覧画面 */
+.contact_table{
+    margin-bottom: 2rem;
+}
+
+/* 詳細画面 */
+.detail_card{
+    margin-bottom: 2rem;
+
+    .card-header h2{
+        /* float: left; */
+        padding-top: 0;
+        padding-right: 1.5rem;
+    }
+    .card-title{
+        margin-top: 0;
+    }
+}
+
+#detail_table{
+    margin: 3.5rem 0;
+    width: 100%;
+    
+    tbody tr th{
+        font-weight: normal;
+        background-color: #f8f6f2;
+        vertical-align: middle;
+        padding: 1rem;
+        width: 20%;
+    }
+    
+    tbody tr td{    
+        padding: .75rem 1rem 1.75rem;    
+    }
+}
