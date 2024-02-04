@@ -1,0 +1,58 @@
+{% extends 'post/base.html' %}
+{% block header %}
+<h1>契約の照会</h1>
+{% endblock header %}
+
+{% block content %}
+<div class="card detail_card">
+    <div class="card-header">
+        <h2 class="card-title">{{task.title}}</h2>
+        <div class="card-subtitle text-body-secondary">
+            {% if task.status == 0 %}
+                見積依頼済
+            {% elif task.status == 1 %}
+                見積確認中
+            {% elif task.status == 2 %}
+                発注済
+            {% elif task.status == 3 %}
+                計上済
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{task.description|linebreaksbr }}</p>
+    </div>
+</div>
+
+<table id="detail_table">
+    <tr>
+        <th>契約期間</th>
+        <td>{{task.contract_period_st}}〜{{task.contract_period_fi}}</td>
+    </tr>
+    <tr>
+        <th>支払方法</th>
+        <td>{{task.contract_method}}</td>
+    </tr>
+    <tr>
+        <th>発注日</th>
+        <td>{{task.order_date}}</td>
+    </tr>
+    <tr>
+        <th>計上予定日</th>
+        <td>{{task.recording_date}}</td>
+    </tr>
+    <tr>
+        <th>稟議有無</th>
+        <td>
+            {% if task.approval_flg %}
+                <a href="{{task.approval_data}}">有り</a>
+            {% else %}
+                無し
+            {% endif %}
+        </td>
+    </tr>
+</table>
+<a class="btn btn-outline-secondary mt-2" href="{% url 'list' %}" role="button">戻る</a>
+{% endblock content %}

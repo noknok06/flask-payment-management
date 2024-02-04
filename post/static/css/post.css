@@ -1,0 +1,61 @@
+i {
+    font-size: 1.3rem;
+}
+
+.fa-circle-info {
+    color: #85c8ee
+}
+
+.fa-file-pen {
+    color: #52795a;
+}
+
+.fa-trash-can {
+    color: #963333;
+}
+
+#action_list {
+    display: flex;
+    justify-content: space-around;
+}
+
+#detail_table {
+    width: 100%;
+}
+
+#detail_table th {
+    position: relative;
+    text-align: left;
+    width: 15%;
+}
+
+#detail_table th:after {
+    display: block;
+    content: "";
+    width: 30px;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    top: calc(50% - 1px);
+    right: -15px;
+}
+
+#detail_table td {
+    text-align: left;
+    padding: 7px 0 7px 30px;
+    width: 85%;
+}
+
+/* 一覧画面 */
+.contact_table{
+    margin-bottom: 2rem;
+}
+
+/* 詳細画面 */
+.detail_card{
+    margin-bottom: 2rem;
+}
+.detail_card .card-header h2{
+    float: left;
+    padding-right: 1.5rem;
+}
