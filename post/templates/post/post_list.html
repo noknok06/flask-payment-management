@@ -5,6 +5,7 @@
 {% endblock header %}
 {% block content %}
 <div class="">
+
     <table class="table contact_table shadow-sm p-3 mb-5 bg-white rounded">
         <thead>
             <tr>
@@ -16,7 +17,43 @@
             </tr>
         </thead>
         <tbody>
-            <h2>今月支払</h2>
+            <h2>未発注 
+                {% if not_ordering_cnt != 0 %}
+                    <span class="badge text-bg-danger">{{ not_ordering_cnt }}</span>
+                {% endif %}                
+            </h2>
+            {% for task in not_ordering_post %}
+                <tr>
+                    <td>{{ task.contract_partner }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.recording_date }}</td>
+                    <td id="action_list">
+                        <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
+                        <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table contact_table shadow-sm p-3 mb-5 bg-white rounded">
+        <thead>
+            <tr>
+                <th scope="col" class="col-2">契約会社</th>
+                <th scope="col" class="col-2">案件名</th>
+                <th scope="col" class="col-1">ステータス</th>
+                <th scope="col" class="col-1">計上予定日</th>
+                <th scope="col" class="col-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <h2>今月支払  
+                {% if this_month_cnt != 0 %}
+                    <span class="badge text-bg-danger">{{ this_month_cnt }}</span>
+                {% endif %}          
+            </h2>
             {% for task in this_month_post %}
                 <tr>
                     <td>{{ task.contract_partner }}</td>

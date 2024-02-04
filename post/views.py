@@ -54,6 +54,10 @@ class PostList(ListView):
         try:
             posts = Post.objects.all()
             
+            not_ordering_post = posts.filter(
+                order_date = None,
+            ).order_by("recording_date")
+
             this_month_post = posts.filter(
                 status__lt=3,
                 recording_date__year=current_year,
@@ -70,6 +74,7 @@ class PostList(ListView):
             ).order_by("recording_date")
 
         except Exception as e:
+            not_ordering_post = Post.objects.none
             this_month_post = Post.objects.none
             monthly_post = Post.objects.none
             next_month_post = Post.objects.none
@@ -77,6 +82,8 @@ class PostList(ListView):
 
         context = super().get_context_data(**kwargs)
 
+        for post in not_ordering_post:
+            post.status = status_mapping.get(int(post.status), "未定義")
         for post in this_month_post:
             post.status = status_mapping.get(int(post.status), "未定義")
         for post in monthly_post:
@@ -84,7 +91,10 @@ class PostList(ListView):
         for post in next_month_post:
             post.status = status_mapping.get(int(post.status), "未定義")
 
+        context['not_ordering_post'] = not_ordering_post
+        context['not_ordering_cnt'] = len(not_ordering_post)
         context['this_month_post'] = this_month_post
+        context['this_month_cnt'] = len(this_month_post)
         context['monthly_post'] = monthly_post
         context['next_month_post'] = next_month_post
         return context
