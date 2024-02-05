@@ -129,7 +129,7 @@ i {
 }
 .contact_table_row .td_detail {
   display: block;
-  color: #7e8573;
+  color: #6d824b;
   width: 100%;
   text-decoration: none;
   line-height: 49px;
@@ -138,7 +138,7 @@ i {
   transition: all 0.5s;
 }
 .contact_table_row .td_detail:hover {
-  background-color: #7e8573;
+  background-color: #6d824b;
   color: white;
 }
 
