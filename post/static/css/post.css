@@ -1,10 +1,10 @@
 @charset "UTF-8";
 * {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 body {
-  background-color: #ededed;
+  background-color: whitesmoke;
 }
 
 hr {
@@ -15,24 +15,12 @@ i {
   font-size: 1.75rem;
 }
 
-.fa-circle-info {
-  color: #85c8ee;
-}
-
 .fa-file-pen {
-  color: #52795a;
+  color: #85c8ee;
 }
 
 .fa-trash-can {
   color: #963333;
-}
-
-#action_list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
 }
 
 .navbar-nav li {
@@ -47,10 +35,25 @@ i {
   margin-bottom: 2rem;
 }
 
+#action_list {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  text-align: center;
+}
+
+.dash_boards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
 .dash_board {
   border: 1px solid #e8e8e8;
   display: inline-block;
-  margin-right: 8px;
+  margin-bottom: 5px;
 }
 
 .dash_img {
@@ -68,7 +71,7 @@ i {
           align-items: center;
 }
 .dash_img i {
-  font-size: 4rem;
+  font-size: 2.5rem;
   color: whitesmoke;
 }
 
@@ -76,20 +79,67 @@ i {
   height: 75px;
   width: 130px;
   display: inline-table;
-  padding: 0.5rem;
+  padding: 0;
+  background-color: white;
 }
 
 .dash_title {
   color: #616161;
+  padding-left: 5px;
 }
 
 .dash_cnt {
   font-weight: 900;
   font-size: 2rem;
+  padding-left: 5px;
 }
 
-.accordion-item .accordion-header i, .accordion-item .accordion-header h5 {
+.accordion-item .accordion-header {
+  vertical-align: middle;
+  /* 上下中央に寄せる */
+}
+.accordion-item .accordion-header button {
+  padding: 0;
+}
+.accordion-item .accordion-header i {
+  display: table-cell;
+  /* 子要素はテーブルセル要素にする */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  padding-right: 40px;
+  width: 30px;
+}
+.accordion-item .accordion-header h5 {
+  margin: 0;
+  padding-left: 10px;
   color: #616161;
+}
+
+.contact_table_row th {
+  padding: 0;
+  margin: 0;
+}
+.contact_table_row td {
+  padding-left: 0;
+  vertical-align: middle;
+}
+.contact_table_row a {
+  padding-left: 10px;
+}
+.contact_table_row .td_detail {
+  display: block;
+  color: #7e8573;
+  width: 100%;
+  text-decoration: none;
+  line-height: 49px;
+  padding-left: 10px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.contact_table_row .td_detail:hover {
+  background-color: #7e8573;
+  color: white;
 }
 
 /* 詳細画面 */
@@ -105,9 +155,14 @@ i {
   margin-top: 0;
 }
 
+.dataTable tr {
+  border: #e1e1e1;
+}
+
 #detail_table {
   margin: 3.5rem 0;
   width: 100%;
+  background-color: white;
 }
 #detail_table tbody tr th {
   font-weight: normal;

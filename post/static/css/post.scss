@@ -1,9 +1,9 @@
 * {
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 body {
-    background-color: #ededed;
+    background-color: whitesmoke;
 }
 
 hr {
@@ -14,21 +14,12 @@ i {
     font-size: 1.75rem;
 }
 
-.fa-circle-info {
-    color: #85c8ee;
-}
-
 .fa-file-pen {
-    color: #52795a;
+    color: #85c8ee;
 }
 
 .fa-trash-can {
     color: #963333;
-}
-
-#action_list {
-    display: flex;
-    justify-content: space-around;
 }
 
 // ナビ
@@ -46,10 +37,23 @@ i {
     margin-bottom: 2rem;
 }
 
+#action_list {
+    // display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.dash_boards {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
 .dash_board {
     border: 1px solid #e8e8e8;
     display: inline-block;
-    margin-right: 8px;
+    // margin-right: 8px;
+    margin-bottom: 5px;
 }
 
 .dash_img {
@@ -61,7 +65,7 @@ i {
     align-items: center;
 
     i {
-        font-size: 4rem;
+        font-size: 2.5rem;
         color: whitesmoke;
     }
 }
@@ -69,21 +73,67 @@ i {
     height: 75px;
     width: 130px;
     display: inline-table;
-    padding: 0.5rem;
+    padding: 0;
+    background-color: white;
 }
 .dash_title {
     color: #616161;
+    padding-left: 5px;
 }
 .dash_cnt {
     font-weight: 900;
     font-size: 2rem;
+    padding-left: 5px;
 }
 
 .accordion-item {
+    // margin-right: 15px;
     .accordion-header {
-        i, h5 {
+        vertical-align: middle; /* 上下中央に寄せる */ 
+        button{
+            padding: 0;
+        }
+        i {
+            display: table-cell; /* 子要素はテーブルセル要素にする */
+            color: white;
+            text-align: center;
+            padding: 15px;
+            padding-right: 40px;
+            width: 30px;
+        }
+        h5 {
+            margin: 0;
+            padding-left: 10px;
             color: #616161;
         }
+    }
+}
+
+.contact_table_row {
+    th{
+        padding: 0;
+        margin: 0;
+    }
+    td {
+        padding-left: 0;
+        // margin: 0;
+        vertical-align: middle;
+    }
+    a{
+        padding-left: 10px;
+    }
+    .td_detail {
+        display: block;
+        color: rgb(126, 133, 115);
+        width: 100%;
+        text-decoration: none;
+        line-height: 49px;
+        padding-left: 10px;
+        transition: all 0.5s;
+    }
+    .td_detail:hover {
+        background-color: rgb(126, 133, 115);
+        color: white;
     }
 }
 
@@ -101,9 +151,16 @@ i {
     }
 }
 
+.dataTable {
+    tr {
+        border: #e1e1e1;
+    }
+}
+
 #detail_table {
     margin: 3.5rem 0;
     width: 100%;
+    background-color: white;
 
     tbody tr th {
         font-weight: normal;

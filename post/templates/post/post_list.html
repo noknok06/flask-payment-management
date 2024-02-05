@@ -6,7 +6,7 @@
 {% block content %}
 <div class="">
 
-    <div class="dash_boards" style="margin-bottom: 25px;">
+    <div class="dash_boards">
         <div class="dash_board">
             <div class="dash_img" style="background-color: #9bafff;">
                 <i class="fa-regular fa-floppy-disk"></i>
@@ -49,37 +49,32 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseThree1" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <h5><i class="fa-regular fa-floppy-disk"></i> 未発注</h5>
+                    <i class="fa-regular fa-floppy-disk" style="background-color: #9bafff;"></i><h5>未発注</h5>
                 </button>
             </h2>
             <div id="flush-collapseThree1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
 
                     <table class="table contact_table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="col-2">契約会社</th>
-                                <th scope="col" class="col-2">案件名</th>
-                                <th scope="col" class="col-1">ステータス</th>
-                                <th scope="col" class="col-1">計上予定日</th>
-                                <th scope="col" class="col-1"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for task in not_ordering_post %}
-                            <tr>
-                                <td>{{ task.contract_partner }}</td>
-                                <td>{{ task.title }}</td>
-                                <td>{{ task.status }}</td>
-                                <td>{{ task.recording_date }}</td>
-                                <td id="action_list">
-                                    <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
-                                    <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
-                                    <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
+                        <tr>
+                            <th scope="col" class="col-2">契約会社</th>
+                            <th scope="col" class="col-2">案件名</th>
+                            <th scope="col" class="col-1">ステータス</th>
+                            <th scope="col" class="col-1">計上予定日</th>
+                            <th scope="col" class="col-1"></th>
+                        </tr>
+                        {% for task in not_ordering_post %}
+                        <tr class="contact_table_row">
+                            <td>{{ task.contract_partner }}</td>
+                            <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
+                            <td>{{ task.status }}</td>
+                            <td>{{ task.recording_date }}</td>
+                            <td id="action_list">
+                                <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
+                                <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
@@ -90,12 +85,11 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseThree2" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <h5><i class="fa-regular fa-credit-card"></i> 今月支払</h5>
+                    <i class="fa-regular fa-credit-card" style="background-color: #a54022;"></i><h5>今月支払</h5>
                 </button>
             </h2>
             <div id="flush-collapseThree2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-
 
                     <table class="table contact_table">
                         <thead>
@@ -109,13 +103,12 @@
                         </thead>
                         <tbody>
                             {% for task in this_month_post %}
-                            <tr>
+                            <tr class="contact_table_row">
                                 <td>{{ task.contract_partner }}</td>
-                                <td>{{ task.title }}</td>
+                                <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
                                 <td>{{ task.status }}</td>
                                 <td>{{ task.recording_date }}</td>
                                 <td id="action_list">
-                                    <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
                                     <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                                     <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
@@ -132,7 +125,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseThree3" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <h5><i class="fa-solid fa-calendar-days"></i> 毎月支払</h5>
+                    <i class="fa-solid fa-calendar-days" style="background-color: #3b8e57;"></i><h5>毎月支払</h5>
                 </button>
             </h2>
             <div id="flush-collapseThree3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -150,13 +143,12 @@
                         </thead>
                         <tbody>
                             {% for task in monthly_post %}
-                            <tr>
+                            <tr class="contact_table_row">
                                 <td>{{ task.contract_partner }}</td>
-                                <td>{{ task.title }}</td>
+                                <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
                                 <td>{{ task.status }}</td>
                                 <td>{{ task.recording_date }}</td>
                                 <td id="action_list">
-                                    <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
                                     <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                                     <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
@@ -173,7 +165,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseThree4" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <h5><i class="fa-solid fa-forward"></i> 翌月以降支払</h5>
+                    <i class="fa-solid fa-forward" style="background-color: #ff9d09;"></i><h5>翌月以降支払</h5>
                 </button>
             </h2>
             <div id="flush-collapseThree4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -192,13 +184,12 @@
                         </thead>
                         <tbody>
                             {% for task in next_month_post %}
-                            <tr>
+                            <tr class="contact_table_row">
                                 <td>{{ task.contract_partner }}</td>
-                                <td>{{ task.title }}</td>
+                                <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
                                 <td>{{ task.status }}</td>
                                 <td>{{ task.recording_date }}</td>
                                 <td id="action_list">
-                                    <a href="{% url 'detail' task.pk %}"><i class="fa-solid fa-circle-info"></i></a>
                                     <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                                     <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
