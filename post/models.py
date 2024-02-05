@@ -40,7 +40,7 @@ class Post(models.Model):
     approval_flg = models.BooleanField("稟議有無")
     approval_data = models.CharField("稟議", max_length=300, blank=True, null=True,)
 
-    status = models.IntegerField("ステータス", max_length=20, choices=CHOICE, null=True,)
+    status = models.IntegerField("ステータス", choices=CHOICE, blank=True, null=True,)
 
     created_at = models.DateTimeField('作成日時', auto_now_add=True)
 

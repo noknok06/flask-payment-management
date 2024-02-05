@@ -1,9 +1,21 @@
+* {
+    font-size: 1.2rem;
+}
+
+body {
+    background-color: #ededed;
+}
+
+hr {
+    border: none;
+}
+
 i {
     font-size: 1.75rem;
 }
 
 .fa-circle-info {
-    color: #85c8ee
+    color: #85c8ee;
 }
 
 .fa-file-pen {
@@ -20,47 +32,88 @@ i {
 }
 
 // ナビ
-.navbar-nav{
-    li{
+.navbar-nav {
+    li {
         padding-right: 20px;
     }
-    i{
+    i {
         padding-right: 5px;
     }
 }
 
 /* 一覧画面 */
-.contact_table{
+.contact_table {
     margin-bottom: 2rem;
 }
 
+.dash_board {
+    border: 1px solid #e8e8e8;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.dash_img {
+    height: 75px;
+    width: 70px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+        font-size: 4rem;
+        color: whitesmoke;
+    }
+}
+.dash_detail {
+    height: 75px;
+    width: 130px;
+    display: inline-table;
+    padding: 0.5rem;
+}
+.dash_title {
+    color: #616161;
+}
+.dash_cnt {
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+.accordion-item {
+    .accordion-header {
+        i, h5 {
+            color: #616161;
+        }
+    }
+}
+
 /* 詳細画面 */
-.detail_card{
+.detail_card {
     margin-bottom: 2rem;
 
-    .card-header h2{
+    .card-header h2 {
         /* float: left; */
         padding-top: 0;
         padding-right: 1.5rem;
     }
-    .card-title{
+    .card-title {
         margin-top: 0;
     }
 }
 
-#detail_table{
+#detail_table {
     margin: 3.5rem 0;
     width: 100%;
-    
-    tbody tr th{
+
+    tbody tr th {
         font-weight: normal;
         background-color: #f8f6f2;
         vertical-align: middle;
         padding: 1rem;
         width: 20%;
     }
-    
-    tbody tr td{    
-        padding: .75rem 1rem 1.75rem;    
+
+    tbody tr td {
+        padding: 0.75rem 1rem 1.75rem;
     }
 }

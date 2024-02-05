@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Post, Company
 from .forms import PostForm
 from datetime import datetime, timedelta
 
@@ -83,20 +83,22 @@ class PostList(ListView):
         context = super().get_context_data(**kwargs)
 
         for post in not_ordering_post:
-            post.status = status_mapping.get(int(post.status), "未定義")
+            post.status = status_mapping.get(int(post.status), "")
         for post in this_month_post:
-            post.status = status_mapping.get(int(post.status), "未定義")
+            post.status = status_mapping.get(int(post.status), "")
         for post in monthly_post:
-            post.status = status_mapping.get(int(post.status), "未定義")
+            post.status = status_mapping.get(int(post.status), "")
         for post in next_month_post:
-            post.status = status_mapping.get(int(post.status), "未定義")
+            post.status = status_mapping.get(int(post.status), "")
 
         context['not_ordering_post'] = not_ordering_post
         context['not_ordering_cnt'] = len(not_ordering_post)
         context['this_month_post'] = this_month_post
         context['this_month_cnt'] = len(this_month_post)
         context['monthly_post'] = monthly_post
+        context['monthly_cnt'] = len(monthly_post)
         context['next_month_post'] = next_month_post
+        context['next_month_cont'] = len(next_month_post)
         return context
 
 class PostDetail(DetailView):

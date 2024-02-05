@@ -1,4 +1,16 @@
 @charset "UTF-8";
+* {
+  font-size: 1.2rem;
+}
+
+body {
+  background-color: #ededed;
+}
+
+hr {
+  border: none;
+}
+
 i {
   font-size: 1.75rem;
 }
@@ -33,6 +45,51 @@ i {
 /* 一覧画面 */
 .contact_table {
   margin-bottom: 2rem;
+}
+
+.dash_board {
+  border: 1px solid #e8e8e8;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.dash_img {
+  height: 75px;
+  width: 70px;
+  float: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.dash_img i {
+  font-size: 4rem;
+  color: whitesmoke;
+}
+
+.dash_detail {
+  height: 75px;
+  width: 130px;
+  display: inline-table;
+  padding: 0.5rem;
+}
+
+.dash_title {
+  color: #616161;
+}
+
+.dash_cnt {
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.accordion-item .accordion-header i, .accordion-item .accordion-header h5 {
+  color: #616161;
 }
 
 /* 詳細画面 */
