@@ -1,0 +1,57 @@
+{% extends 'post/base.html' %}
+{% load humanize %}
+{% block header %}
+<h1>会社情報の照会</h1>
+{% endblock header %}
+
+{% block content %}
+<div class="card detail_card">
+    <div class="card-header">
+        <h2 class="card-title">{{company.company_name}}</h2>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{company.company_description|linebreaksbr }}</p>
+    </div>
+</div>
+
+<table id="detail_table">
+    <tr>
+        <th>特記事項</th>
+        <td>{{company.special_notices|linebreaksbr}}</td>
+    </tr>
+    <tr>
+        <th>基本契約書</th>
+        <td>
+            {% if company.basic_contract_file %}
+            <a href="{{company.basic_contract_file.url}}""><i class="fa-regular fa-file"></i></a>
+            {% elif company.basic_contract %}
+                <a href="{{company.basic_contract}}"">{{company.basic_contract}}</a>
+            {% else %}
+                無し
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<h2>関連案件</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">作成日</th>
+            <th scope="col">案件名</th>
+            <th scope="col">ステータス</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in related_posts %}
+        <tr>
+            <td>{{ post.created_at | date:"Y/n/j"}}</td>
+            <td><a class="td_detail" href="{% url 'detail' post.pk %}">{{ post.title }}</a></td>
+            <td><span class="badge bg-primary rounded-pill">{{ post.status }}</span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a class="btn btn-outline-secondary mt-2" href="{% url 'company' %}" role="button">戻る</a>
+{% endblock content %}

@@ -5,11 +5,17 @@
 {% endblock header %}
 
 {% block content %}
-<form action="" method="POST">{% csrf_token %}
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}    
     <table class="table">
         {{ form.as_table }}
     </table>
-    <a class="btn btn-outline-secondary" href="{% url 'list' %}" role="button">戻る</a>
+    <a class="btn btn-outline-secondary" onclick="goBack()" role="button">戻る</a>
     <input class="btn btn-success" type="submit" value="送信">
 </form>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock content %}

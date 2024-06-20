@@ -1,32 +1,59 @@
 {% extends 'post/base.html' %}
+{% load humanize %}
 {% block header %}
-<h1>契約の照会</h1>
+<h1 style="float: left;">契約の照会</h1>
+<a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen" style="color: whitesmoke; padding-left: 20px; padding-top: 10px;"></i></a>
 {% endblock header %}
 
 {% block content %}
 <div class="card detail_card">
     <div class="card-header">
         <h2 class="card-title">{{task.title}}</h2>
-        <div class="card-subtitle text-body-secondary">
+        <div class="card-subtitle">
             {% if task.status == 0 %}
-                見積依頼済
+            見積依頼済
             {% elif task.status == 1 %}
-                見積確認中
+            見積確認中
             {% elif task.status == 2 %}
-                発注済
+            発注済
             {% elif task.status == 3 %}
-                計上済
+            計上済
             {% else %}
 
             {% endif %}
         </div>
     </div>
+    <span style="margin-top: 10px; margin-left: 15px; color: #a9a9a9;">post date：{{ task.created_at|date:"20y/n/j H:i:s"}}</span>
     <div class="card-body">
-        <p class="card-text">{{task.description|linebreaksbr }}</p>
+        <p class="card-text">{{task.description|safe|linebreaksbr }}</p>
     </div>
 </div>
 
 <table id="detail_table">
+    <tr>
+        <th>社名</th>
+        <td><a href="{% url 'company_detail' task.contract_partner_id %}" ">{{ task.contract_partner }}</a></td>
+    </tr>
+    <tr>
+        <th>見積書</th>
+        <td>
+            {% if task.quotation_file %}
+            <a href="{{task.quotation_file.url}}""><i class="fa-regular fa-file"></i></a>
+            {% else %}
+                無し
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>注文書</th>
+        <td>
+            {% if task.order_file %}
+            <a href="{{task.order_file.url}}""><i class="fa-regular fa-file"></i></a>
+            {% else %}
+                無し
+            {% endif %}
+        </td>
+    </tr>
     <tr>
         <th>契約期間</th>
         <td>{{task.contract_period_st}}〜{{task.contract_period_fi}}</td>
@@ -41,18 +68,93 @@
     </tr>
     <tr>
         <th>計上予定日</th>
-        <td>{{task.recording_date}}</td>
+        <td>{{task.recording_date|default_if_none:""}}</td>
+    </tr>
+    <tr>
+        <th>見積金額</th>
+        {% if task.amount == None %}
+        <td>{{ all_price | intcomma }}</td>
+        {% else %}
+        <td>{{task.amount | intcomma}}</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>予備費</th>
+        <td>{{task.reserve_fund | intcomma}}</td>
     </tr>
     <tr>
         <th>稟議有無</th>
         <td>
             {% if task.approval_flg %}
-                <a href="{{task.approval_data}}" target="_blank">有り</a>
+            <a href="{{task.approval_data}}"">有り</a>
             {% else %}
-                無し
+            無し
             {% endif %}
         </td>
     </tr>
+    <tr>
+        <th>資産登録</th>
+        <td>
+            {% if task.asset_registration_flg %}
+            有り
+            {% else %}
+            無し
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>計上科目</th>
+        <td>
+            {{task.accrual_accounts}}
+        </td>
+    </tr>
+    <tr>
+        <th>親コード</th>
+        {% if task.parent_code %}
+        <td><a href="{% url 'detail' task.parent_code.pk %}" ">{{ task.parent_code.pk }}　{{ task.parent_code }}</a></td>
+        {% else %}
+        <td>---</td>
+        {% endif %}
+    </tr>
 </table>
-<a class="btn btn-outline-secondary mt-2" href="{% url 'list' %}" role="button">戻る</a>
+
+<h2 style="font-size: 2rem; padding-top: 10px;">一括管理対象の案件</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">作成日</th>
+            <th scope="col">発注先</th>
+            <th scope="col">案件名</th>
+            <th scope="col">ステータス</th>
+            <th scope="col" style="text-align: right;">見積金額</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in related_post %}
+        <tr>
+            <td>{{ post.created_at | date:"Y/n/j"}}</td>
+            <td>{{ post.contract_partner }}</td>
+            <td><a class="td_detail" href="{% url 'detail' post.pk %}"">{{ post.title }}</a></td>
+            <td class="td_status"><span class="badge rounded-pill tag-status">{{ post.status }}</span></td>
+            <td style="text-align: right;">{{ post.amount | intcomma }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="row">Totals</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <td style="text-align: right;">{{ all_price | intcomma }}</td>
+        </tr>
+    </tfoot>
+</table>
+<a class="btn btn-outline-secondary mt-2" onclick="goBack()" role="button">戻る</a>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock content %}

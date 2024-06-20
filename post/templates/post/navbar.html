@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'list' %}">Contract List</a>
+      <a class="navbar-brand" href="{% url 'list' %}" style="color: white;">Contract List</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -10,7 +10,16 @@
             <a class="nav-link" href="{% url 'list' %}"><i class="fa-solid fa-house"></i> ホーム</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'listall' %}"><i class="fa-solid fa-list"></i> 一覧</a>
+            <a class="nav-link" href="{% url 'listall' %}"><i class="fa-solid fa-list"></i> 案件一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'orderlist' %}"><i class="fa-solid fa-list"></i> 発注照会</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'company' %}"><i class="fa-solid fa-list"></i> 会社一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'approval' %}"><i class="fa-solid fa-list"></i> 稟議一覧</a>
           </li>
         </ul>
       </div>

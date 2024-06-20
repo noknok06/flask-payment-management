@@ -1,0 +1,68 @@
+{% extends 'post/base.html' %}
+
+{% block header %}
+<p>発注内容を確認します</p>
+{% endblock header %}
+{% block content %}
+
+<form class="order-form">
+    {% csrf_token %}
+    <div class="order-form-group">
+        <label for="project">案件名</label>
+        <input type="text" class="form-control" id="project" name="project" placeholder="案件名を入力してください">
+    </div>
+    <div class="order-form-group">
+        <label for="order_date_from">発注日(FROM)</label>
+        <input type="date" class="form-control" id="order_date_from" name="order_date_from">
+    </div>
+    <div class="order-form-group">
+        <label for="order_date_to">発注日(TO)</label>
+        <input type="date" class="form-control" id="order_date_to" name="order_date_to">
+    </div>
+    <div class="order-form-group">
+        <label for="recording_date">計上日</label>
+        <input type="date" class="form-control" id="recording_date" name="recording_date">
+    </div>
+    <button type="submit" class="btn btn1">検索実行</button>
+</form>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <table class="table" id="data-table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col" style="width: 20%;">契約会社</th>
+                <th scope="col" style="width: 40%;">案件名</th>
+                <!-- <th scope="col">ｽﾃｰﾀｽ</th> -->
+                <th scope="col">発注日</th>
+                <th scope="col">タグ</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="contact_table_row">
+            {% for task in object_list %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td><a class="td_detail"
+                        href="{% url 'company_detail' task.contract_partner_id %}">{{task.contract_partner }}</a></td>
+                <!-- <td>{{ task.contract_partner }}</td> -->
+                <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
+                <!-- <td>{{ task.status }}</td> -->
+                <td>{{ task.order_date|default_if_none:""|date:"Y/n/j" }}</td>
+                <td class="td_status">
+                    <span class="badge bg-danger rounded-pill">{{ task.tag| default_if_none:""}}</span>
+                </td>
+                <td id="action_list">
+                    <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
+                    <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

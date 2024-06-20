@@ -8,20 +8,25 @@
     <table class="table" id="data-table">
         <thead>
             <tr>
-                <th scope="col">契約会社</th>
-                <th scope="col">案件名</th>
-                <th scope="col">ステータス</th>
-                <th scope="col">計上予定日</th>
+                <th scope="col">ID</th>
+                <th scope="col" style="width: 20%;">契約会社</th>
+                <th scope="col" style="width: 30%;">案件名</th>
+                <th scope="col">ｽﾃｰﾀｽ</th>
+                <th scope="col">計上日</th>
+                <th scope="col">タグ</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody class="contact_table_row">
             {% for task in object_list %}
             <tr>
-                <td>{{ task.contract_partner }}</td>
+                <td>{{ task.id }}</td>
+                <td><a class="td_detail" href="{% url 'company_detail' task.contract_partner_id %}">{{ task.contract_partner }}</a></td>
+                <!-- <td>{{ task.contract_partner }}</td> -->
                 <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
                 <td>{{ task.status }}</td>
-                <td>{{ task.recording_date }}</td>
+                <td>{{ task.recording_date|default_if_none:""|date:"Y/n/j" }}</td>
+                <td class="td_status"><span class="badge bg-danger rounded-pill">{{ task.tag| default_if_none:"" }}</span></td>
                 <td id="action_list">
                     <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                     <a href="{% url 'delete' task.pk %}"><i class="fa-solid fa-trash-can"></i></a>

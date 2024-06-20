@@ -7,7 +7,14 @@
 {% block content %}
 <p>「{{task.title}}」を削除しますか？</p>
 <form action="" method="POST">{% csrf_token %}
-    <a class="btn btn-outline-secondary" href="{% url 'list' %}" role="button">戻る</a>
+    <a class="btn btn-outline-secondary" onclick="goBack()" role="button">戻る</a>
     <input class="btn btn-danger" type="submit" value="削除">
+    </form>
+    
 </form>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 {% endblock content %}
