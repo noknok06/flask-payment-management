@@ -14,6 +14,10 @@ class Approval(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "稟議書"
+        verbose_name_plural = "稟議書管理"
+
 class Company(models.Model):
 
     company_name = models.CharField("会社名", max_length=50)
@@ -31,6 +35,10 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
+    class Meta:
+        verbose_name = "会社情報"
+        verbose_name_plural = "会社情報管理"
+
 class Tag(models.Model):
     
     tag = models.CharField("タグ", max_length=40, blank=True, null=True,)
@@ -45,17 +53,21 @@ class Tag(models.Model):
                 name="tag_unique"
             ),
         ]
+        
+        verbose_name = "タグ"
+        verbose_name_plural = "タグ管理"
 
 
 class Post(models.Model):
     
     CHOICE = (
-        (99, '新規'),
-        (0, '見積依頼済'),
-        (1, '見積確認中'),
-        (2, '発注済'),
-        (3, '計上済'),
-        (100, '保留'),
+        (10, '新規'),
+        (20, '見積依頼済'),
+        (30, '見積確認中'),
+        (40, '発注済'),
+        (50, '計上済'),
+        (90, '保留'),
+        (100, '案件集約'),
     )
     CHOICE_CONTRACT = (
         ('１回', '１回'),
@@ -99,10 +111,29 @@ class Post(models.Model):
         validators=[FileExtensionValidator(['pdf', ])],
         blank=True, null=True
     )
-    # 新しいフィールド
     parent_code = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
-
     created_at = models.DateTimeField('作成日時', auto_now_add=True)
 
+    def get_status_display(self):
+        return dict(self.CHOICE).get(self.status, 'Unknown status')
+    
+    class Meta:
+        verbose_name = "案件"
+        verbose_name_plural = "案件管理"
+        
     def __str__(self):
         return self.title
+
+class TrnPost(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='monthly_statuses')
+    status_date = models.DateField("ステータス日付", default=timezone.now)
+    status = models.IntegerField("ステータス", choices=Post.CHOICE)
+    notes = models.TextField("備考", blank=True, null=True)
+
+    class Meta:
+        verbose_name = "月次計上ステータス"
+        verbose_name_plural = "月次計上管理"
+
+
+    def __str__(self):
+        return f"{self.post.title} - {self.status_date}"

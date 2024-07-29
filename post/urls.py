@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostDetail, PostList, PostManage, PostCreate, PostUpdate, PostDelete, PostListAll ,CompanyList ,CompanyDetail, ApprovalList
+from .views import PostDetail, PostList, PostManage, PostCreate, PostUpdate, PostDelete, PostListAll ,CompanyList ,CompanyDetail, ApprovalList, PostStatusUpdate
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path("create/", PostCreate.as_view(), name="create"),
     path("update/<int:pk>", PostUpdate.as_view(), name="update"),
     path("delete/<int:pk>", PostDelete.as_view(), name="delete"),
+    path("monthly/<int:pk>", PostStatusUpdate.as_view(), name="monthly_statuses_update"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

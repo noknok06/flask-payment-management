@@ -3,6 +3,10 @@
 {% block header %}
 <h1 style="float: left;">契約の照会</h1>
 <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen" style="color: whitesmoke; padding-left: 20px; padding-top: 10px;"></i></a>
+{% if has_current_month_status or task.contract_method != "毎月" %}
+{% else %}
+<a id="confirmButton" class="btn btn1 monthly_statuse" href="{% url 'monthly_statuses_update' task.pk %}">今月分を計上</a>
+{% endif %}
 {% endblock header %}
 
 {% block content %}
@@ -10,17 +14,7 @@
     <div class="card-header">
         <h2 class="card-title">{{task.title}}</h2>
         <div class="card-subtitle">
-            {% if task.status == 0 %}
-            見積依頼済
-            {% elif task.status == 1 %}
-            見積確認中
-            {% elif task.status == 2 %}
-            発注済
-            {% elif task.status == 3 %}
-            計上済
-            {% else %}
-
-            {% endif %}
+            {{ task.get_status_display }}
         </div>
     </div>
     <span style="margin-top: 10px; margin-left: 15px; color: #a9a9a9;">post date：{{ task.created_at|date:"20y/n/j H:i:s"}}</span>
@@ -157,4 +151,17 @@
         window.history.back();
     }
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var button = document.getElementById('confirmButton');
+      button.addEventListener('click', function(event) {
+        // 確認ダイアログを表示
+        var userConfirmed = confirm('本当にこの操作を続行しますか？');
+        if (!userConfirmed) {
+          // ユーザーが「キャンセル」を選んだ場合、リンクの遷移を防ぐ
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
 {% endblock content %}

@@ -79,6 +79,10 @@ i {
   background-color: rgb(249, 217, 217);
   color: #EB8686;
 }
+.monthly_statuse{
+  margin-left: 20px;
+  vertical-align: super;
+}
 
 .dash_boards {
   display: -webkit-box;
@@ -117,22 +121,30 @@ i {
 
 .dash_detail {
   height: 75px;
-  width: 150px;
+  width: 220px;
   display: inline-table;
   padding: 0;
   background-color: white;
+  position: relative; 
 }
 
 .dash_title {
   color: #616161;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   padding-left: 8px;
+  position: relative;
+  z-index: 1; /* Ensures the title is underneath the count */
 }
 
 .dash_cnt {
   font-weight: 900;
-  font-size: 2rem;
-  padding-left: 5px;
+  font-size: 2.5rem;
+  padding-right: 20px;
+  text-align: right;
+  position: absolute; /* Take it out of the normal flow */
+  top: 20px; /* Position at the top of the container */
+  right: 0; /* Align to the right */
+  z-index: 2; /* Make sure it's above the title */
 }
 
 .accordion-item .accordion-header {
@@ -147,9 +159,11 @@ i {
   /* 子要素はテーブルセル要素にする */
   color: white;
   text-align: center;
-  padding: 15px;
-  padding-right: 40px;
-  width: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #6088C6;
+  line-height: 60px;
+  
 }
 .accordion-item .accordion-header h5 {
   margin: 0;

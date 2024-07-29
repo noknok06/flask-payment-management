@@ -78,9 +78,9 @@
                         </tr>
                         {% for task in not_ordering_post %}
                         <tr class="contact_table_row" data-amount="{{ task.amount }}" data-reserve="{{ task.reserve_fund }}">
-                            <td><a class="td_detail" href="{% url 'detail' task.pk %}"">{{ task.id }}</a></td>
-                            <td><a class="td_detail" href="{% url 'company_detail' task.contract_partner_id %}"">{{ task.contract_partner }}</a></td>
-                            <td><a class="td_detail" href="{% url 'detail' task.pk %}"">{{ task.title }}</a></td>
+                            <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.id }}</a></td>
+                            <td><a class="td_detail" href="{% url 'company_detail' task.contract_partner_id %}">{{ task.contract_partner }}</a></td>
+                            <td><a class="td_detail" href="{% url 'detail' task.pk %}">{{ task.title }}</a></td>
                             <td class="td_status"><span class="badge rounded-pill tag-status">{{ task.status }}</span></td>
                             {% if task.tag == "" %}
                             <td class="td_status"></td>
@@ -111,7 +111,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseThree2" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <i class="fa-regular fa-credit-card" style="background-color: #6088C6;"></i><h5>今月支払</h5>
+                    <i class="fa-regular fa-credit-card" style="background-color: #6088C6;"></i><h5>今月</h5>
                 </button>
             </h2>
             <div id="flush-collapseThree2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -131,30 +131,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for task in this_month_post %}
-                            <tr class="contact_table_row" data-amount="{{ task.amount }}" data-reserve="{{ task.reserve_fund }}">
-                                <td><a class="td_detail" href="{% url 'detail' task.pk %}" ">{{ task.id }}</a></td>
-                                <td><a class="td_detail" href="{% url 'company_detail' task.contract_partner_id %}" ">{{ task.contract_partner }}</a></td>
+                            {% for task in this_month_post_with_trn %}
+                            <tr class="contact_table_row" data-amount="{{ task.post.amount }}" data-reserve="{{ task.post.reserve_fund }}">
+                                <td><a class="td_detail" href="{% url 'detail' task.post.pk %}">{{ task.post.id }}</a></td>
+                                <td><a class="td_detail" href="{% url 'company_detail' task.post.contract_partner_id %}">{{ task.post.contract_partner }}</a></td>
                                 <td>
-                                    <a class="td_detail" href="{% url 'detail' task.pk %}" ">{{ task.title }}
-                                        {% if task.contract_method == "毎月" %}
+                                    <a class="td_detail" href="{% url 'detail' task.post.pk %}">{{ task.post.title }}
+                                        {% if task.post.contract_method == "毎月" %}
                                         <i class="fa-solid fa-arrows-rotate" style="padding: 10px; font-size: 1.2rem;"></i>
                                         {% endif %}
                                     </a>
                                 </td>
-                                <td class="td_status"><span class="badge rounded-pill tag-status">{{ task.status }}</span></td>
-                                {% if task.tag == "" %}
+                                {% if task.has_trn_post %}
+                                    <td class="td_status"><span class="badge rounded-pill tag-status">今月済</span></td>
+                                {% else %}
+                                    <td class="td_status"><span class="badge rounded-pill tag-status">{{ task.post.status }}</span></td>
+                                {% endif %}
+                                {% if task.post.tag == "" %}
                                 <td class="td_status"></td>
                                 {% else %}
-                                <td class="td_status"><a href="{% url 'list' task.tag %}" class="badge rounded-pill tag">{{ task.tag | default_if_none:""}}</a></td>
+                                <td class="td_status"><a href="{% url 'list' task.post.tag %}" class="badge rounded-pill tag">{{ task.post.tag | default_if_none:""}}</a></td>
                                 {% endif %}    
-                                <td>{{ task.recording_date|default_if_none:""|date:"Y/n/j" }}</td>
+                                <td>{{ task.post.recording_date|default_if_none:""|date:"Y/n/j" }}</td>
                                 <td id="action_list">
-                                    <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
+                                    <a href="{% url 'update' task.post.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                                    
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-html="true" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="見積金額：{{task.amount}}<br>予備金額：{{task.reserve_fund}}">
+                                    <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-html="true" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="見積金額：{{task.post.amount}}<br>予備金額：{{task.post.reserve_fund}}">
                                         details
                                     </button>
                                 </td>
@@ -190,26 +194,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for task in wait_record_post %}
-                            <tr class="contact_table_row" data-amount="{{ task.amount }}" data-reserve="{{ task.reserve_fund }}">
-                                <td><a class="td_detail" href="{% url 'detail' task.pk %}" ">{{ task.id }}</a></td>
-                                <td><a class="td_detail" href="{% url 'company_detail' task.contract_partner_id %}" ">{{ task.contract_partner }}</a></td>
+                            {% for task in wait_record_post_with_trn %}
+                            <tr class="contact_table_row" data-amount="{{ task.post.amount }}" data-reserve="{{ task.post.reserve_fund }}">
+                                <td><a class="td_detail" href="{% url 'detail' task.post.pk %}">{{ task.post.id }}</a></td>
+                                <td><a class="td_detail" href="{% url 'company_detail' task.post.contract_partner_id %}">{{ task.post.contract_partner }}</a></td>
                                 <td>
-                                    <a class="td_detail" href="{% url 'detail' task.pk %}" ">{{ task.title }}
-                                        {% if task.contract_method == "毎月" %}
+                                    <a class="td_detail" href="{% url 'detail' task.post.pk %}">{{ task.post.title }}
+                                        {% if task.post.contract_method == "毎月" %}
                                         <i class="fa-solid fa-arrows-rotate" style="padding: 10px; font-size: 1.2rem;"></i>
                                         {% endif %}
                                     </a>
                                 </td>
-                                <td class="td_status"><span class="badge rounded-pill tag-status">{{ task.status }}</span></td>
-                                {% if task.tag == None %}
+                                {% if task.has_trn_post %}
+                                    <td class="td_status"><span class="badge rounded-pill tag-status">今月済</span></td>
+                                {% else %}
+                                    <td class="td_status"><span class="badge rounded-pill tag-status">{{ task.post.status }}</span></td>
+                                {% endif %}
+                                {% if task.post.tag == None %}
                                     <td></td>
                                 {% else %}
-                                    <td class="td_status"><span class="badge rounded-pill tag">{{ task.tag | default_if_none:""}}</span></td>
+                                    <td class="td_status"><span class="badge rounded-pill tag">{{ task.post.tag | default_if_none:""}}</span></td>
                                 {% endif %}
-                                <td>{{ task.recording_date|default_if_none:""|date:"Y/n/j" }}</td>
+                                <td>{{ task.post.recording_date|default_if_none:""|date:"Y/n/j" }}</td>
                                 <td id="action_list">
-                                    <a href="{% url 'update' task.pk %}"><i class="fa-solid fa-file-pen"></i></a>
+                                    <a href="{% url 'update' task.post.pk %}"><i class="fa-solid fa-file-pen"></i></a>
                                    
                                 </td>
                                 <td>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Company, Approval, Tag
+from .models import Post, Company, Approval, Tag, TrnPost
 from import_export import resources  
 from import_export.admin import ImportExportModelAdmin 
 
@@ -20,7 +20,7 @@ class PostResource(resources.ModelResource):
 class PostAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     ordering = ['id']
     list_display = ( 'id',"contract_partner", "category", "title",
-                    "contract_method", "recording_date")  # タイトルと著者を表示するよう設定
+                    "contract_method", "status", "recording_date")  # タイトルと著者を表示するよう設定
     resource_class = PostResource
 
     
@@ -36,3 +36,4 @@ class ApprovalAdmin(admin.ModelAdmin):
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Approval, ApprovalAdmin)
+admin.site.register(TrnPost)
